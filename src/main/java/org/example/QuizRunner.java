@@ -4,20 +4,17 @@ import java.util.ArrayList;
 
 public class QuizRunner {
 
-    public QuizRunner() {
-    }
-
     public static void main(String[] args) {
-
         Quiz quiz = new Quiz();
-        ArrayList<String> answers = new ArrayList<>();
-        answers.add("George Washington");
-        answers.add("Abe Lincoln");
-        answers.add("Isaac Newton");
-        answers.add("King Tut");
-        Question ques1 = new MultipleChoice("Who was the first president of USA? ", answers,"George Washington");
-        quiz.addQuestion(ques1);
-        quiz.runQuiz();
 
+        // Add questions to the quiz
+        quiz.addQuestion(new MultipleChoice("What is the capital of America?",
+                new String[]{"Paris", "Madrid", "Berlin", "Washington DC"}, 3));
+        quiz.addQuestion(new CheckBox("Select the name of the fruits.",
+                new String[]{"Apple", "Banana", "Mango", "Onion", "Kiwi", "Beans"}, new boolean[]{true, true, true, false, true, false}));
+        quiz.addQuestion(new TrueFalse("is Dinosaurs still Alive", false));
+
+        // Run the quiz
+        quiz.runQuiz();
     }
 }

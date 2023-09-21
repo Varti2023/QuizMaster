@@ -1,22 +1,26 @@
 package org.example;
 import java.util.ArrayList;
 
-public abstract class Question{
+public abstract class Question {
     private String prompt;
-    private ArrayList<String> answers = new ArrayList<>();
+    public String[] options;
 
-    public Question(String prompt, ArrayList<String> answers) {
+
+    public Question(String prompt, String[] options) {
         this.prompt = prompt;
-        this.answers = answers;
+        this.options = options;
     }
 
-    public String getPrompt() {
-        return prompt;
+    public abstract boolean isCorrect(String[] answers);
+
+    public void displayQuestion() {
+        System.out.println(prompt);
     }
 
+    public void displayOptions() {
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
 
-    public ArrayList<String> getAnswers() {
-        return answers;
     }
-
 }

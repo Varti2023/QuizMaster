@@ -7,37 +7,30 @@ import java.util.Scanner;
 
 public class Quiz {
 
-    private ArrayList<Question> questions = new ArrayList<Question>();
-    private int score = 0;
-    private Scanner input;
+    private ArrayList<Question> questions = new ArrayList<>();
 
-    public Quiz() {
-        this.input= new Scanner(System.in);
+    public void addQuestion(Question question) {
+        questions.add(question);
     }
 
-    public void addQuestion(Question que){
-        this.questions.add(que);
-    }
+    public void runQuiz() {
+        Scanner scanner = new Scanner(System.in);
+        int score = 0;
 
-    public void runQuiz(){
-        String newLine = System.lineSeparator();
-        System.out.println("Hello! Welcome to the quiz contest");
-        System.out.println(newLine);
+        for (Question question : questions) {
+            question.displayQuestion();
+            question.displayOptions();
+            System.out.print("Your answer(s): ");
+            String[] userAnswers = scanner.nextLine().split(",");
 
-        String var5;
-        for(Iterator var1 = this.questions.iterator(); var1.hasNext(); var5 = input.nextLine()){
-            Question queNum = (Question) var1.next();
-            System.out.println(queNum.getPrompt());
-            Iterator var3 = queNum.getAnswers().iterator();
-
-            while(var3.hasNext()){
-                String answer = (String) var3.next();
-                System.out.println(answer);
+            if (question.isCorrect(userAnswers)) {
+                System.out.println("Correct!\n");
+                score++;
+            } else {
+                System.out.println("Incorrect.\n");
             }
         }
-    }
 
-    public void gradeQuiz(){
-
+        System.out.println("Your score: " + score + "/" + questions.size());
     }
 }
